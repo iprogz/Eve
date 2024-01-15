@@ -1,0 +1,29 @@
+// Assume x is a 4D tensor of input images (batch_size x channels x height x width)
+// y is a matrix of corresponding output values
+// filters is a tensor of convolutional filters (num_filters x input_channels x filter_height x filter_width)
+// bias is a vector of bias terms for each filter
+// strides is a vector of integers, specifying the stride for each dimension of the convolution
+// padding is a string, specifying the type of padding to use (e.g. "valid" or "same")
+// activation_function is a function that applies an activation function to a tensor
+
+// Define the convolution function
+vector<vector<vector<vector<float>>>> convolve(
+    vector<vector<vector<vector<float>>>> input,
+    vector<vector<vector<vector<float>>>> filters,
+    vector<float> bias,
+    vector<int> strides,
+    string padding
+) {
+    int batch_size = input.size();
+    int input_channels = input[0].size();
+    int input_height = input[0][0].size();
+    int input_width = input[0][0][0].size();
+
+    int num_filters = filters.size();
+    int filter_channels = filters[0].size();
+    int filter_height = filters[0][0].size();
+    int filter_width = filters[0][0][0].size();
+
+    int output_height, output_width;
+    if (padding == "valid
+

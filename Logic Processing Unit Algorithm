@@ -1,0 +1,17 @@
+For each logical statement:
+   if the operator is AND:
+      if all inputs are true:
+         output is true
+      else:
+         output is false
+   else if the operator is OR:
+      if at least one input is true:
+         output is true
+      else:
+         output is false
+   else if the operator is NOT:
+      if the input is true:
+         output is false
+      else:
+         output is true
+

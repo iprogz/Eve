@@ -1,0 +1,8 @@
+For each decision in Eve's decision-making process:
+   if the input signal is positive:
+      increase the decision weight by the individual's personal trait parameter
+   else if the input signal is negative:
+      decrease the decision weight by the individual's personal trait parameter
+   else:
+      leave the decision weight unchanged
+

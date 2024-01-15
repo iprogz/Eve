@@ -1,0 +1,8 @@
+For each synapse in Eve's neural network:
+   if the input signal is positive:
+      increase the strength of the synapse
+   else if the input signal is negative:
+      decrease the strength of the synapse
+   else:
+      leave the synapse strength unchanged
+

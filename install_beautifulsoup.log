@@ -1,0 +1,10 @@
+Collecting beautifulsoup4
+  Using cached https://files.pythonhosted.org/packages/57/f4/a69c20ee4f660081a7dedb1ac57f29be9378e04edfcb90c526b923d4bebc/beautifulsoup4-4.12.2-py3-none-any.whl
+Collecting soupsieve>1.2 (from beautifulsoup4)
+  Using cached https://files.pythonhosted.org/packages/4c/f3/038b302fdfbe3be7da016777069f26ceefe11a681055ea1f7817546508e3/soupsieve-2.5-py3-none-any.whl
+Installing collected packages: soupsieve, beautifulsoup4
+ERROR: Could not install packages due to an EnvironmentError: [Errno 13] Permission denied: '/usr/local/lib/python3.8/site-packages/soupsieve'
+Consider using the `--user` option or check the permissions.
+
+WARNING: You are using pip version 19.2.3, however version 23.3.2 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.

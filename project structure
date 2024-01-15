@@ -1,0 +1,147 @@
+{
+  "data_collection": {
+    "pragma_solidity_contract.sol": {},
+    "achievement_data.csv": {},
+    "demographic_data.csv": {},
+    "program_data.csv": {},
+    "perception_data.csv": {}
+  },
+  ".gitignore": {},
+  "LICENSE": {},
+  "README.md": {},
+  "machine_learning": {
+    "neural_networks": {
+      "feedforward_neural_networks.py": {},
+      "convolutional_neural_networks.py": {},
+      "recurrent_neural_networks.py": {}
+    },
+    "decision_trees.py": {},
+    "random_forests.py": {},
+    "support_vector_machines.py": {},
+    "naive_bayes_classifiers.py": {},
+    "k_means_clustering.py": {},
+    "hidden_markov_models.py": {},
+    "reinforcement_learning.py": {},
+    "generative_adversarial_networks.py": {},
+    "dimensionality_reduction": {
+      "principal_component_analysis.py": {},
+      "t_sne.py": {},
+      "linear_discriminant_analysis.py": {}
+    }
+  },
+  "data_processing_system": {
+    "backend": {
+      "api": {
+        "__init__.py": {},
+        "routes.py": {},
+        "views.py": {}
+      },
+      "models": {
+        "__init__.py": {},
+        "task.py": {},
+        "user.py": {}
+      },
+      "services": {
+        "__init__.py": {},
+        "task_scheduler.py": {},
+        "task_worker.py": {}
+      },
+      "tests": {
+        "__init__.py": {},
+        "test_api.py": {},
+        "test_services.py": {}
+      },
+      "config.py": {},
+      "main.py": {},
+      "requirements.txt": {}
+    },
+    "frontend": {
+      "public": {
+        "index.html": {}
+      },
+      "src": {
+        "components": {
+          "LoginForm.js": {},
+          "TaskForm.js": {},
+          "TaskList.js": {}
+        },
+        "App.js": {},
+        "index.js": {},
+        "styles.css": {}
+      },
+      ".babelrc": {},
+      ".eslintrc": {},
+      "package.json": {},
+      "webpack.config.js": {}
+    },
+    "database": {
+      "migrations": {
+        "0001_initial.py": {},
+        "__init__.py": {}
+      },
+      "db.sqlite3": {}
+    },
+    "docs": {
+      "task_management_guide.pdf": {},
+      "resource_allocation_manual.pdf": {}
+    },
+    "utils": {
+      "__init__.py": {},
+      "file_classifier.py": {},
+      "audio_analysis.py": {}
+    }
+  },
+  "machine_learning": {
+    "modelling_and_simulation": {
+      "discrete_event_simulation.py": {},
+      "agent_based_modelling.py": {},
+      "system_dynamics_modelling.py": {},
+      "computational_fluid_dynamics.py": {},
+      "molecular_modelling.py": {},
+      "physics_based_modelling.py": {}
+    },
+    "data_mining": {
+      "clustering_algorithms.py": {},
+      "classification_algorithms.py": {},
+      "association_rule_mining.py": {},
+      "decision_trees.py": {},
+      "deep_learning_for_unstructured_data.py": {},
+      "text_mining_and_nlp.py": {}
+    },
+    "natural_language_processing": {
+      "text_classification.py": {},
+      "sentiment_analysis.py": {},
+      "named_entity_recognition.py": {},
+      "machine_translation.py": {},
+      "chatbots.py": {},
+      "question_answering_systems.py": {}
+    },
+    "deep_learning": {
+      "convolutional_neural_networks.py": {},
+      "recurrent_neural_networks.py": {},
+      "generative_adversarial_networks.py": {},
+      "reinforcement_learning.py": {},
+      "transfer_learning.py": {},
+      "multi_task_learning.py": {},
+      "deep_learning_training.py": {}
+    },
+    "learning_and_intelligence": {
+      "unsupervised_learning.py": {},
+      "supervised_learning.py": {},
+      "reinforcement_learning.py": {},
+      "multi_armed_bandits.py": {},
+      "active_learning.py": {},
+      "imitation_learning.py": {}
+    }
+  }
+}
+
+Image Classification: This is the task of categorizing an image into one of several predefined classes. For example, classifying an image of a dog as a "dog" class, or an image of a car as a "car" class. This task involves training a machine learning model on a dataset of labeled images to recognize patterns and features that distinguish different classes.
+
+Object Detection: This task involves not only identifying the object(s) in an image but also localizing them by drawing a bounding box around them. Object detection can be used in a variety of applications such as self-driving cars, surveillance, and face detection.
+
+Image Feature Vector: This is a numerical representation of an image that captures the essence of the image. Feature vectors are often used as input to machine learning algorithms, such as clustering and classification algorithms. Examples of feature vectors include SIFT, HOG, and CNN features.
+
+Image Segmentation: This task involves dividing an image into multiple segments or regions, each of which corresponds to a different object or part of the image. Image segmentation is useful in many applications, such as medical imaging, object recognition, and autonomous navigation.
+
+

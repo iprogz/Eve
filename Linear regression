@@ -1,0 +1,12 @@
+// Assume x is a vector of input features and y is a vector of corresponding output values
+// w is a vector of weights to be learned
+// alpha is the learning rate
+// num_iters is the number of iterations of gradient descent to perform
+
+for (int i = 0; i < num_iters; i++) {
+    vector<float> y_pred = dot(x, w);
+    vector<float> error = y_pred - y;
+    vector<float> gradient = dot(transpose(x), error);
+    w = w - alpha * gradient;
+}
+

@@ -1,0 +1,59 @@
+I remember you telling me about your love for astronomy.
+You once shared a fascinating fact about the life cycle of stars.
+I remember you telling me about your love for astronomy.
+You once shared a fascinating fact about the life cycle of stars.
+I remember you telling me about your love for astronomy.
+You once shared a fascinating fact about the life cycle of stars.
+User: hello
+User: 
+User: 
+User: 
+User: if [[ ! -f memories.txt ]]; then
+User: fi
+User: # Function to add a memory to the file
+User: echo "$1" >> memories.txt
+User: 
+User: function get_random_memory_or_prompt() {
+User: if [[ $((RANDOM % 2)) -eq 0 ]]; then
+User: random_memory=$(cat memories.txt | shuf -n 1)
+User: else
+User: random_index=$(shuf -i 0-$((${#prompts[@]}-1)) -n 1)
+User: echo $random_prompt
+User: }
+User: # Function to identify user based on patterns
+User: local user_input="$1"
+User: 
+User: if [[ "$user_input" == *"$pattern"* ]]; then
+User: if [[ -n "$user_name" ]]; then
+User: return
+User: fi
+User: 
+User: }
+User: # Define constant value x
+User: 
+User: prompts=(
+User: "Tell me something you're curious about."
+User: "Share a memory that makes you happy."
+User: 
+User: while true; do
+User: 
+User: message=$(get_random_memory_or_prompt)
+User: 
+User: read -p "User: " user_input
+User: # Identify the user based on patterns
+User: add_memory "User: $user_input"  # Store user input as a memory
+User: # Process user input based on user identification
+User: echo "Bot: Hello, $user_name! How can I assist you today?"
+User: echo "Bot: I'm here to chat! Feel free to share more or ask questions."
+User: 
+User: velocity=$((x * 2))  # Simplified example; replace with actual prediction logic
+User: 
+User: # - Add the interaction to memories
+User: 
+User: done
+User: memory is hard to create functionaly with ohter bia opinons
+hello: hello
+I remember you telling me about your love for astronomy.
+You once shared a fascinating fact about the life cycle of stars.
+I remember you telling me about your love for astronomy.
+You once shared a fascinating fact about the life cycle of stars.

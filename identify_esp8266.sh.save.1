@@ -1,0 +1,100 @@
+192.168.0.01
+
+#!/bin/bash
+
+# Function to check if a command is available
+command_exists() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+# Function to display a menu
+display_menu() {
+  echo "Select an option:"
+  echo "1. List USB devices and Serial Ports"
+  echo "2. Display kernel ring buffer for USB devices"
+  echo "3. Identify the port for the connected ESP8266"
+  echo "4. Additional information about the USB device"
+  echo "5. Identify the ESP8266 model using esptool"
+  echo "6. Export hardware information to a file"
+  echo "0. Exit"
+}
+
+# Function to list USB devices and Serial Ports using lsusb and ls /dev/ttyUSB*
+list_usb_devices() {
+  echo "List of USB devices:"
+  lsusb
+
+  echo "Serial Ports:"
+  ls /dev/ttyUSB*
+}
+
+# Function to display kernel ring buffer for USB devices using dmesg
+display_kernel_buffer() {
+  echo "Kernel ring buffer for USB devices:"
+  dmesg | grep -i usb
+}
+
+# Function to identify the port for the connected ESP8266
+identify_esp_port() {
+  ESP_PORT=$(dmesg | grep -i "cp210x converter now attached to" | awk '{print $NF}')
+  if [ -z "$ESP_PORT" ]; then
+    echo "Error: ESP8266 not found. Check the connection and try again."
+  else
+    echo "ESP8266 is connected to port: $ESP_PORT"
+  fi
+}
+
+# Function to display additional information about the USB device using udevadm
+additional_usb_info() {
+  echo "Additional information about the USB device:"
+  udevadm info -a -n "$ESP_PORT"
+}
+
+# Function to identify the ESP8266 model using esptool
+identify_esp_model() {
+  echo "Identifying ESP8266 model:"
+  esptool.py chip_id
+}
+
+# Function to export hardware information to a file
+export_hardware_info() {
+  echo "Exporting hardware information to hardware_info.txt"
+  lshw > hardware_info.txt
+  lspci >> hardware_info.txt
+  echo "Hardware information exported to hardware_info.txt"
+}
+
+# Main script
+
+# Check if the script is run as root
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run as root"
+  exit 1
+fi
+
+# Check if required commands are available
+if ! command_exists lsusb || ! command_exists dmesg || ! command_exists udevadm || ! command_exists esptool.py || ! command_exists lshw || ! command_exists lspci; then
+  echo "Required commands are missing. Please install them and try again."
+  exit 1
+fi
+
+# Main loop
+while true; do
+  display_menu
+  read -p "Enter your choice (0-6): " choice
+
+  case $choice in
+    1) list_usb_devices ;;
+    2) display_kernel_buffer ;;
+    3) identify_esp_port ;;
+    4) additional_usb_info ;;
+    5) identify_esp_model ;;
+    6) export_hardware_info ;;
+    0) echo "Exiting script. Goodbye!"; exit 0 ;;
+    *) echo "Invalid choice. Please enter a number between 0 and 6." ;;
+  esac
+done
+
+1
+
+

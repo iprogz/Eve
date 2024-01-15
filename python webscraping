@@ -1,0 +1,319 @@
+title header price condition location 
+(segement picture for malfunctions and list after checking new listing or product speficiations ) (use datascrape) 
+
+
+import os
+import threading
+import tkinter as tk
+import requests
+from bs4 import BeautifulSoup
+from flask import Flask, request, jsonify
+import time
+from concurrent.futures import ThreadPoolExecutor
+import openai
+
+# Flask app setup
+app = Flask(__name__)
+
+# Lock for thread synchronization
+lock = threading.Lock()
+
+# Set up a list to store scraped data
+scraped_data = []
+
+# Define Flask route for data collection
+@app.route('/scrape', methods=['POST'])
+def scrape_website():
+    with lock:
+        try:
+            data = request.json
+            url = data.get('url')
+            scraped_data = perform_scraping(url)
+            return jsonify({'data': scraped_data})
+        except Exception as e:
+            return jsonify({'error': str(e)})
+
+# Worker bot functions for background tasks
+def worker_bot_function1():
+    with lock:
+        # Add your custom logic for function 1 here
+        pass
+
+# Background task execution
+executor = ThreadPoolExecutor(max_workers=3)
+
+def execute_memory_tasks():
+    while True:
+        # Execute worker bot functions in thread pool
+        executor.submit(worker_bot_function1)
+        time.sleep(60)
+
+# Start background task thread
+memory_task_thread = threading.Thread(target=execute_memory_tasks, daemon=True)
+memory_task_thread.start()
+
+# Tkinter GUI setup
+def create_gui():
+    window = tk.Tk()
+    window.title("Web Scraper")
+
+    label = tk.Label(window, text="Enter URL:")
+    entry = tk.Entry(window)
+    button = tk.Button(window, text="Scrape", command=lambda: handle_button_click(entry.get(), window))
+
+    label.pack()
+    entry.pack()
+    button.pack()
+
+    window.mainloop()
+
+# Function to handle scraping button click
+def handle_button_click(url, window):
+    try:
+        response = requests.post('http://localhost:5000/scrape', json={'url': url})
+        data = response.json().get('data')
+        display_scraped_data(data, window)
+        
+        # Now, let's integrate OpenAI dialogue
+        conversation = []
+        conversation.append("User: Can you provide some information about the scraped data?")
+        
+        for item in data:
+            conversation.append(f"User: Tell me about {item}.")
+            conversation.append(f"Assistant: {generate_description(item)}")
+        
+        display_dialogue(conversation, window)
+        
+    except requests.exceptions.RequestException as e:
+        display_error(f'Network Error: {str(e)}', window)
+    except Exception as e:
+        display_error(f'Error: {str(e)}', window)
+
+# Function to display scraped data
+def display_scraped_data(data, window):
+    result_text = tk.Text(window)
+    result_text.insert(tk.END, "Scraped Data:\n")
+    for item in data:
+        result_text.insert(tk.END, f'{item}\n')
+    result_text.pack()
+
+# Function to generate descriptions using OpenAI
+def generate_description(item):
+    # You should replace 'your_api_key' with your actual OpenAI API key
+    openai.api_key = 'your_api_key'
+    response = openai.Completion.create(
+        engine="davinci",
+        prompt=f"Provide a description for {item}.",
+        max_tokens=50
+    )
+    return response.choices[0].text
+
+# Function to display dialogue
+def display_dialogue(conversation, window):
+    dialogue_text = tk.Text(window)
+    dialogue_text.insert(tk.END, "Assistant's Responses:\n")
+    for i in range(0, len(conversation), 2):
+        dialogue_text.insert(tk.END, f'User: {conversation[i]}\n')
+        dialogue_text.insert(tk.END, f'Assistant: {conversation[i + 1]}\n')
+    dialogue_text.pack()
+
+# Function to display error messages
+def display_error(error_msg, window):
+    error_text = tk.Text(window)
+    error_text.insert(tk.END, f'Error: {error_msg}\n')
+    error_text.pack()
+
+# Main execution
+if __name__ == "__main__":
+    create_gui_thread = threading.Thread(target=create_gui)
+    create_gui_thread.start()
+
+    # Run the Flask app in the main thread
+    app.run(debug=True, use_reloader=False)
+------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+import os
+import threading
+import tkinter as tk
+import requests
+from bs4 import BeautifulSoup
+from flask import Flask, request, jsonify
+import time
+from concurrent.futures import ThreadPoolExecutor
+import openai
+
+# Flask app setup
+app = Flask(__name__)
+
+# Lock for thread synchronization
+lock = threading.Lock()
+
+# Set up a list to store fetched data
+fetched_data = []
+
+
+# Define Flask route for data collection
+@app.route('/scrape', methods=['POST'])
+def scrape_website():
+    with lock:
+        try:
+            data = request.json
+            url = data.get('url')
+            scraped_data = perform_scraping(url)
+            return jsonify({'data': scraped_data})
+        except Exception as e:
+            return jsonify({'error': str(e)})
+
+
+# Worker bot functions for background tasks
+
+# Function 1: Fetch data from a real API every minute
+def worker_bot_function1():
+    with lock:
+        try:
+            # Add your custom logic for background task 1 here
+
+            # Replace this URL with the actual API endpoint you want to fetch data from
+            api_url = "https://example.com/api/data"
+
+            # Make an API request to fetch data
+            response = requests.get(api_url)
+
+            if response.status_code == 200:
+                # If the API call is successful, extract and store the data
+                fetched_data.append(response.json())  # Assuming the API response is in JSON format
+
+                # Print the fetched data (for demonstration purposes) or handle it as needed
+                print(f"Worker Bot Function 1: Fetched data - {fetched_data[-1]}")
+            else:
+                print(f"Worker Bot Function 1: API request failed with status code {response.status_code}")
+
+        except Exception as e:
+            print(f"Worker Bot Function 1: Error - {str(e)}")
+
+
+# Background task execution
+executor = ThreadPoolExecutor(max_workers=3)
+
+
+def execute_memory_tasks():
+    while True:
+        # Execute worker bot functions in thread pool
+        executor.submit(worker_bot_function1)
+        time.sleep(60)
+
+
+# Start background task thread
+memory_task_thread = threading.Thread(target=execute_memory_tasks, daemon=True)
+
+
+# Tkinter GUI setup
+def create_gui():
+    window = tk.Tk()
+    window.title("Web Scraper")
+
+    label = tk.Label(window, text="Enter URL:")
+    entry = tk.Entry(window)
+    scrape_button = tk.Button(window, text="Scrape", command=lambda: handle_scrape_button_click(entry.get(), window))
+    display_button = tk.Button(window, text="Display Fetched Data", command=lambda: display_fetched_data(window))
+
+    label.pack()
+    entry.pack()
+    scrape_button.pack()
+    display_button.pack()
+
+    window.mainloop()
+
+
+# Function to handle scraping button click
+def handle_scrape_button_click(url, window):
+    try:
+        response = requests.post('http://localhost:5000/scrape', json={'url': url})
+        data = response.json().get('data')
+        display_scraped_data(data, window)
+
+        # Now, let's integrate OpenAI dialogue
+        conversation = []
+        conversation.append("User: Can you provide some information about the scraped data?")
+
+        for item in data:
+            conversation.append(f"User: Tell me about {item}.")
+            conversation.append(f"Assistant: {generate_description(item)}")
+
+        display_dialogue(conversation, window)
+
+    except requests.exceptions.RequestException as e:
+        display_error(f'Network Error: {str(e)}', window)
+    except Exception as e:
+        display_error(f'Error: {str(e)}', window)
+
+
+# Function to display scraped data
+def display_scraped_data(data, window):
+    result_text = tk.Text(window)
+    result_text.insert(tk.END, "Scraped Data:\n")
+    for item in data:
+        result_text.insert(tk.END, f'{item}\n')
+    result_text.pack()
+
+
+# Function to generate descriptions using OpenAI
+def generate_description(item):
+    # You should replace 'your_api_key' with your actual OpenAI API key
+    openai.api_key = 'your_api_key'
+    response = openai.Completion.create(
+        engine="davinci",
+        prompt=f"Provide a description for {item}.",
+        max_tokens=50
+    )
+    return response.choices[0].text
+
+
+# Function to display dialogue
+def display_dialogue(conversation, window):
+    dialogue_text = tk.Text(window)
+    dialogue_text.insert(tk.END, "Assistant's Responses:\n")
+    for i in range(0, len(conversation), 2):
+        dialogue_text.insert(tk.END, f'User: {conversation[i]}\n')
+        dialogue_text.insert(tk.END, f'Assistant: {conversation[i + 1]}\n')
+    dialogue_text.pack()
+
+
+# Function to display error messages
+def display_error(error_msg, window):
+    error_text = tk.Text(window)
+    error_text.insert(tk.END, f'Error: {error_msg}\n')
+    error_text.pack()
+
+
+# Function to start the background task thread
+def start_background_tasks():
+    memory_task_thread.start()
+
+
+# Function to stop the background task thread
+def stop_background_tasks():
+    memory_task_thread.stop()
+
+
+# Main execution
+if __name__ == "__main__":
+    create_gui_thread = threading.Thread(target=create_gui)
+    create_gui_thread.start()
+
+    # Start the background task thread
+    start_background_tasks()
+
+    # Run the Flask app in the main thread
+    app.run(debug=True, use_reloader=False)
+
+

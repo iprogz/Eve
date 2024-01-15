@@ -1,0 +1,46 @@
+2024-01-04T13:40:19,229 Using pip 23.3.2 from /home/steve/.local/lib/python3.10/site-packages/pip (python 3.10)
+2024-01-04T13:40:19,230 Defaulting to user installation because normal site-packages is not writeable
+2024-01-04T13:40:19,379 Created temporary directory: /tmp/pip-build-tracker-ha1lye6s
+2024-01-04T13:40:19,379 Initialized build tracking at /tmp/pip-build-tracker-ha1lye6s
+2024-01-04T13:40:19,379 Created build tracker: /tmp/pip-build-tracker-ha1lye6s
+2024-01-04T13:40:19,379 Entered build tracker: /tmp/pip-build-tracker-ha1lye6s
+2024-01-04T13:40:19,379 Created temporary directory: /tmp/pip-install-b5n7_tt3
+2024-01-04T13:40:19,379 ERROR: You must give at least one requirement to install (see "pip help install")
+2024-01-04T13:40:19,380 Exception information:
+2024-01-04T13:40:19,380 Traceback (most recent call last):
+2024-01-04T13:40:19,380   File "/home/steve/.local/lib/python3.10/site-packages/pip/_internal/cli/base_command.py", line 180, in exc_logging_wrapper
+2024-01-04T13:40:19,380     status = run_func(*args)
+2024-01-04T13:40:19,380   File "/home/steve/.local/lib/python3.10/site-packages/pip/_internal/cli/req_command.py", line 245, in wrapper
+2024-01-04T13:40:19,380     return func(self, options, args)
+2024-01-04T13:40:19,380   File "/home/steve/.local/lib/python3.10/site-packages/pip/_internal/commands/install.py", line 342, in run
+2024-01-04T13:40:19,380     reqs = self.get_requirements(args, options, finder, session)
+2024-01-04T13:40:19,380   File "/home/steve/.local/lib/python3.10/site-packages/pip/_internal/cli/req_command.py", line 461, in get_requirements
+2024-01-04T13:40:19,380     raise CommandError(
+2024-01-04T13:40:19,380 pip._internal.exceptions.CommandError: You must give at least one requirement to install (see "pip help install")
+2024-01-04T13:40:19,512 Remote version of pip: 23.3.2
+2024-01-04T13:40:19,512 Local version of pip:  23.3.2
+2024-01-04T13:40:19,513 Was pip installed by pip? True
+2024-01-04T13:40:19,513 Removed build tracker: '/tmp/pip-build-tracker-ha1lye6s'
+2024-01-04T13:40:28,687 Using pip 23.3.2 from /home/steve/.local/lib/python3.10/site-packages/pip (python 3.10)
+2024-01-04T13:40:28,688 Defaulting to user installation because normal site-packages is not writeable
+2024-01-04T13:40:28,837 Created temporary directory: /tmp/pip-build-tracker-w0zkt8rx
+2024-01-04T13:40:28,837 Initialized build tracking at /tmp/pip-build-tracker-w0zkt8rx
+2024-01-04T13:40:28,838 Created build tracker: /tmp/pip-build-tracker-w0zkt8rx
+2024-01-04T13:40:28,838 Entered build tracker: /tmp/pip-build-tracker-w0zkt8rx
+2024-01-04T13:40:28,838 Created temporary directory: /tmp/pip-install-3e58rlhb
+2024-01-04T13:40:28,838 ERROR: You must give at least one requirement to install (see "pip help install")
+2024-01-04T13:40:28,838 Exception information:
+2024-01-04T13:40:28,838 Traceback (most recent call last):
+2024-01-04T13:40:28,838   File "/home/steve/.local/lib/python3.10/site-packages/pip/_internal/cli/base_command.py", line 180, in exc_logging_wrapper
+2024-01-04T13:40:28,838     status = run_func(*args)
+2024-01-04T13:40:28,838   File "/home/steve/.local/lib/python3.10/site-packages/pip/_internal/cli/req_command.py", line 245, in wrapper
+2024-01-04T13:40:28,838     return func(self, options, args)
+2024-01-04T13:40:28,838   File "/home/steve/.local/lib/python3.10/site-packages/pip/_internal/commands/install.py", line 342, in run
+2024-01-04T13:40:28,838     reqs = self.get_requirements(args, options, finder, session)
+2024-01-04T13:40:28,838   File "/home/steve/.local/lib/python3.10/site-packages/pip/_internal/cli/req_command.py", line 461, in get_requirements
+2024-01-04T13:40:28,838     raise CommandError(
+2024-01-04T13:40:28,838 pip._internal.exceptions.CommandError: You must give at least one requirement to install (see "pip help install")
+2024-01-04T13:40:28,880 Remote version of pip: 23.3.2
+2024-01-04T13:40:28,880 Local version of pip:  23.3.2
+2024-01-04T13:40:28,881 Was pip installed by pip? True
+2024-01-04T13:40:28,881 Removed build tracker: '/tmp/pip-build-tracker-w0zkt8rx'

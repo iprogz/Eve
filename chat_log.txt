@@ -1,0 +1,47 @@
+User input: hello
+User input: 
+User input: 
+User input: 
+User input: if [[ ! -f memories.txt ]]; then
+User input: fi
+User input: # Function to add a memory to the file
+User input: echo "$1" >> memories.txt
+User input: 
+User input: function get_random_memory_or_prompt() {
+User input: if [[ $((RANDOM % 2)) -eq 0 ]]; then
+User input: random_memory=$(cat memories.txt | shuf -n 1)
+User input: else
+User input: random_index=$(shuf -i 0-$((${#prompts[@]}-1)) -n 1)
+User input: echo $random_prompt
+User input: }
+User input: # Function to identify user based on patterns
+User input: local user_input="$1"
+User input: 
+User input: if [[ "$user_input" == *"$pattern"* ]]; then
+User input: if [[ -n "$user_name" ]]; then
+User input: return
+User input: fi
+User input: 
+User input: }
+User input: # Define constant value x
+User input: 
+User input: prompts=(
+User input: "Tell me something you're curious about."
+User input: "Share a memory that makes you happy."
+User input: 
+User input: while true; do
+User input: 
+User input: message=$(get_random_memory_or_prompt)
+User input: 
+User input: read -p "User: " user_input
+User input: # Identify the user based on patterns
+User input: add_memory "User: $user_input"  # Store user input as a memory
+User input: # Process user input based on user identification
+User input: echo "Bot: Hello, $user_name! How can I assist you today?"
+User input: echo "Bot: I'm here to chat! Feel free to share more or ask questions."
+User input: 
+User input: velocity=$((x * 2))  # Simplified example; replace with actual prediction logic
+User input: 
+User input: # - Add the interaction to memories
+User input: 
+User input: done

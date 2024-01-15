@@ -1,0 +1,35 @@
+// Assume x is a matrix of input features, where each row represents a single input instance
+// y is a matrix of corresponding output values
+// layers is a vector of integers, specifying the number of neurons in each layer of the network
+// activation_function is a function that applies an activation function to a vector
+
+vector<vector<float>> activations = x;
+vector<vector<float>> weights;
+
+// Initialize weights randomly
+for (int i = 0; i < layers.size() - 1; i++) {
+    int in_size = layers[i];
+    int out_size = layers[i+1];
+    vector<vector<float>> layer_weights = randn(in_size, out_size);
+    weights.push_back(layer_weights);
+}
+
+for (int i = 0; i < num_iters; i++) {
+    // Forward pass
+    for (int j = 0; j < weights.size(); j++) {
+        activations = activation_function(dot(activations, weights[j]));
+    }
+
+    // Compute error
+    vector<vector<float>> error = activations - y;
+
+    // Backpropagation
+    for (int j = weights.size() - 1; j >= 0; j--) {
+        vector<vector<float>> layer_inputs = j == 0 ? x : activations[j-1];
+        vector<vector<float>> gradient = dot(transpose(layer_inputs), error);
+        weights[j] = weights[j] - alpha * gradient;
+        error = dot(error, transpose(weights[j]));
+        error = hadamard(error, activation_function_derivative(activations[j]));
+    }
+}
+
