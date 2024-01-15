@@ -1,0 +1,87 @@
+import os
+import PyPDF2
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import classification_report
+
+# Define the path to the directory containing the PDF files
+pdf_directory = "path/to/pdf/directory"
+
+# Define the list of PDF files
+pdf_files = [
+    "17SPDemographics.pdf",
+    "2008078.pdf",
+    "5311002.pdf",
+    "brain-emulation-roadmap-report(1).pdf",
+    "brain-emulation-roadmap-report(2).pdf",
+    "brain-emulation-roadmap-report.pdf",
+    "Business-Report-Writing-Skills.pdf",
+    "Cognitive.Functions.of.Language.pdf",
+    "concepts-in-strategic-management-business-policy.pdf",
+    "E201book.pdf",
+    "innoregio_supp_management.pdf",
+    "Introduction to Endocrine Disrupting Chemicals.pdf",
+    "IntroductionToPsychologyText.pdf",
+    "MIT14_01SCF11_rttext(1).pdf",
+    "MIT14_01SCF11_rttext.pdf",
+    "Modern Principles of Economics Edition 2.pdf",
+    "nimh-brain-basics_132798.pdf",
+    "placementmanagementsystem-140731111540-phpapp01.pdf",
+    "Principles_of_Economics(1).pdf",
+    "Principles_of_Economics.pdf",
+    "PrinciplesOfMicroeconomicsBAC.pdf",
+    "Risk.pdf",
+    "Spring2017deptdemographics.pdf",
+    "supplychain.docx",
+    "supplychain.pdf",
+    "supply management.pdf",
+    "Theory10.pdf",
+    "Thomas L. Wheelen, Strategic Management.pdf",
+]
+
+# Function to read text from a PDF file
+def extract_text_from_pdf(pdf_file):
+    pdf_file_obj = open(pdf_file, "rb")
+    pdf_reader = PyPDF2.PdfFileReader(pdf_file_obj)
+    text = ""
+    for page_num in range(pdf_reader.numPages):
+        page = pdf_reader.getPage(page_num)
+        text += page.extractText()
+    return text
+
+# Function to learn from the PDF files
+def learn_from_pdfs(pdf_directory, pdf_files):
+    # Initialize the text and labels lists
+    texts = []
+    labels = []
+
+    for pdf_file in pdf_files:
+        # Read the text from the PDF file
+        text = extract_text_from_pdf(os.path.join(pdf_directory, pdf_file))
+        
+        # Extract the label from the filename
+        label = pdf_file.split(".")[0]
+        
+        # Add the text and label to the lists
+        texts.append(text)
+        labels.append(label)
+
+    # Initialize the CountVectorizer and MultinomialNB classifier
+    vectorizer = CountVectorizer()
+    classifier = MultinomialNB()
+
+    # Create the pipeline
+    pipeline = Pipeline([
+        ("vectorizer", vectorizer),
+        ("classifier", classifier)
+    ])
+
+    # Fit the pipeline to the data
+    pipeline.fit(texts, labels)
+
+    # Return the pipeline
+    return pipeline
+
+# Call the learn_from_pdfs function
+pipeline = learn_from_pdfs(pdf_directory, pdf_files)

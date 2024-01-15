@@ -1,0 +1,104 @@
+import sys
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QTextEdit, QLabel, QVBoxLayout, QHBoxLayout, QRadioButton, QButtonGroup, QCheckBox, QFileDialog
+import pandas as pd
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+from nltk.tag import pos_tag
+import spacy
+from textblob import TextBlob
+import nltk
+import pygame
+
+# Download necessary NLTK resources
+nltk.download('punkt', quiet=True)
+nltk.download('averaged_perceptron_tagger', quiet=True)
+
+# Load spaCy model
+nlp = spacy.load("en_core_web_sm")
+
+# Initialize Pygame
+pygame.init()
+
+# Define process_text function with categorization & contextualization
+def process_text(text, context):
+    tokens = nltk.word_tokenize(text.lower())
+    cleaned_tokens = [token for token in tokens if token.isalpha()]
+
+    features = {
+        "stemmed_words": [PorterStemmer().stem(word) for word in cleaned_tokens],
+        "lemmatized_words": [WordNetLemmatizer().lemmatize(word) for word in cleaned_tokens],
+        "pos_tags": pos_tag(cleaned_tokens),
+        "named_entities": [(ent.text, ent.label_) for ent in nlp(text).ents],
+        "sentiment": TextBlob(text).sentiment.polarity,
+        "tags": []  # For user-defined tags
+    }
+
+    # Sentiment-based categorization
+    if features["sentiment"] > 0.5:
+        features["tags"].append("positive")
+    elif features["sentiment"] < -0.5:
+        features["tags"].append("negative")
+    else:
+        features["tags"].append("neutral")
+
+    # Contextualization based on previous interactions (replace with your logic)
+    if context["previously_mentioned_keywords"]:
+        for keyword in context["previously_mentioned_keywords"]:
+            if keyword in text:
+                features["tags"].append("relevant")
+
+    # Topic analysis for further categorization (replace with your chosen library)
+    topics = [topic for topic in nlp(text).topics]
+    features["tags"].extend(topics)
+
+    return features
+
+# Function to display processed features with categorization and context
+def display_processed_features(features, context):
+    output_text = ""
+    output_text += f"Sentiment: {features['sentiment']}\n"
+    output_text += f"Tags: {', '.join(features['tags'])}\n"
+    output_text += f"Contextually relevant keywords: {', '.join(context['previously_mentioned_keywords'])}"
+    output_display.setText(output_text)
+
+# Functions for data export with categorization and context
+def export_raw_text():
+    text = text_input.text()
+    categories = ["sentiment", "tags", "context"]
+
+    data = {category: [] for category in categories}
+    data["sentiment"].append(process_text(text)["sentiment"])
+    data["tags"].append(", ".join(process_text(text)["tags"]))
+    data["context"].append(", ".join(context["previously_mentioned_keywords"]))
+
+    file_path, _ = QFileDialog.getSaveFileName(window, "Export Raw Text", "", "Text Files (*.txt)")
+    if file_path:
+        with open(file_path, "w") as f:
+            for category, values in data.items():
+                f.write(f"{category}:\n")
+                f.write("\t" + "\n\t".join(values) + "\n")
+
+def export_processed_features():
+    text = text_input.text()
+    features = process_text(text)
+
+    file_path, _ = QFileDialog.getSaveFileName(window, "Export Processed Features", "", "Excel Files (*.xlsx)")
+    if file_path:
+        pd.DataFrame(features, index=[0]).to_excel(file_path, index=False)
+
+def relationship_sequence_management_process_association_distribution():
+    pygame.mixer.music.load("background_music.mp3")
+    pygame.mixer.music.play()
+
+    print("Available commands:")
+    print("- classify: Classify a file and move it to the corresponding folder.")
+    print("- help: Display the list of available commands.")
+    print("- feed: Nourish Eve by providing feedback, engaging in conversation, or offering data.")
+    print("- quest: Collaborate with Eve on challenging tasks or creative projects.")
+    print("- bond: Strengthen the bond with Eve through rituals, gratitude, or shared experiences.")
+    print("- legacy: Share your experience and knowledge with the world through Eve.")
+    print("- trick: Be prepared for a playful surprise from Eve!")
+    print("- evolve: Witness Eve grow and adapt based on our interactions.")
+    print("- audio: Process audio data.")
+    print("- ask: Ask for assistance from Eve's chatbot integration.")
+    print("- tasks: View and manage tasks.")
+    print

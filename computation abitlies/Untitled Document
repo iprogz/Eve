@@ -1,0 +1,45 @@
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QPushButton, QTextEdit, QLabel, QFileDialog, QWidget
+from command_analysis import parse_log_file, analyze_commands
+
+class MainAppWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle("Linux Command Analyzer")
+        self.setGeometry(100, 100, 800, 600)
+
+        layout = QVBoxLayout()
+        self.loadButton = QPushButton("Load Log File", self)
+        self.loadButton.clicked.connect(self.loadLogFile)
+        layout.addWidget(self.loadButton)
+
+        self.resultArea = QTextEdit(self)
+        layout.addWidget(self.resultArea)
+
+        central_widget = QWidget()
+        central_widget.setLayout(layout)
+        self.setCentralWidget(central_widget)
+
+    def loadLogFile(self):
+        filename, _ = QFileDialog.getOpenFileName(self, "Open Log File")
+        if filename:
+            self.analyzeLogFile(filename)
+
+    def analyzeLogFile(self, filepath):
+        parsed_commands = parse_log_file(filepath)
+        analysis_results = analyze_commands(parsed_commands)
+        result_text = '\n'.join([f"Command: {cmd}, Frequency: {freq}" for cmd, freq in analysis_results.items()])
+        self.resultArea.setText(result_text)
+
+def main():
+    app = QApplication(sys.argv)
+    main_window = MainAppWindow()
+    main_window.show()
+    sys.exit(app.exec_())
+
+if __name__ == '__main__':
+    main()
+
